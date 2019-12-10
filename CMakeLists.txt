@@ -867,16 +867,13 @@ IF(WIN32)
 
     # Check MMSystem backend
     CHECK_INCLUDE_FILES("windows.h;mmsystem.h" HAVE_MMSYSTEM_H)
-    FIND_LIBRARY(WINMM_LIBRARY NAMES winmm
-        PATHS ${WINSDK_LIB_DIRS}
-        PATH_SUFFIXES lib lib/x86 lib/x64)
-    IF(HAVE_MMSYSTEM_H AND WINMM_LIBRARY)
+    IF(HAVE_MMSYSTEM_H)
         OPTION(ALSOFT_BACKEND_WINMM "Enable Windows Multimedia backend" ON)
         IF(ALSOFT_BACKEND_WINMM)
             SET(HAVE_WINMM 1)
             SET(BACKENDS  "${BACKENDS} WinMM,")
             SET(ALC_OBJS  ${ALC_OBJS} alc/backends/winmm.cpp alc/backends/winmm.h)
-            SET(EXTRA_LIBS ${WINMM_LIBRARY} ${EXTRA_LIBS})
+            SET(EXTRA_LIBS "WinMM.lib" ${EXTRA_LIBS})
         ENDIF()
     ENDIF()
 
