@@ -8,25 +8,18 @@
 #   DSOUND_LIBRARY     - the dsound library
 #
 
-if (WIN32)
-  include(FindWindowsSDK)
-  if (WINDOWSSDK_FOUND)
-    get_windowssdk_library_dirs(${WINDOWSSDK_PREFERRED_DIR} WINSDK_LIB_DIRS)
-    get_windowssdk_include_dirs(${WINDOWSSDK_PREFERRED_DIR} WINSDK_INCLUDE_DIRS)
-  endif()
-endif()
-
 # DSOUND_INCLUDE_DIR
 find_path(DSOUND_INCLUDE_DIR
           NAMES "dsound.h" 
-          PATHS "${DXSDK_DIR}" ${WINSDK_INCLUDE_DIRS} 
+          PATHS "${DXSDK_DIR}"
           PATH_SUFFIXES include
+		  NO_DEFAULT_PATH
           DOC "The DirectSound include directory")
 
 # DSOUND_LIBRARY
 find_library(DSOUND_LIBRARY
              NAMES dsound
-             PATHS "${DXSDK_DIR}" ${WINSDK_LIB_DIRS}
+             PATHS "${DXSDK_DIR}"
              PATH_SUFFIXES lib lib/x86 lib/x64
              DOC "The DirectSound library")
 
